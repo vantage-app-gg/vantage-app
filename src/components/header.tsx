@@ -20,6 +20,12 @@ export function Header() {
         </Link>
         <nav aria-label="Primary" className="flex items-center gap-6">
           <a
+            href="#roadmap"
+            className="hidden sm:inline font-mono text-xs uppercase tracking-widest text-muted hover:text-accent-strong transition-colors"
+          >
+            Roadmap
+          </a>
+          <a
             href="#pricing"
             className="hidden sm:inline font-mono text-xs uppercase tracking-widest text-muted hover:text-accent-strong transition-colors"
           >
