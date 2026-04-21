@@ -15,12 +15,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vantage-app.gg"),
   title: {
     default: "Vantage — Valorant improvement tool",
     template: "%s · Vantage",
   },
   description:
     "Curated learning content and AI-powered match analysis for Gold–Ascendant Valorant players. Not endorsed by Riot Games.",
+  openGraph: {
+    type: "website",
+    siteName: "Vantage",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@vantage_app_gg",
+    creator: "@vantage_app_gg",
+  },
 };
 
 export default function RootLayout({

@@ -8,8 +8,8 @@ const faqs = [
     a: "We're targeting a private beta with a small group of hand-picked testers first, followed by a public launch. No hard date — we ship when the core flow genuinely feels useful, not before. Follow the build in public to see where we are.",
   },
   {
-    q: "How much will it cost?",
-    a: "Fundamentals stay free forever: five launch topics, curated creator videos matched to your rank, and up to two personal projects. The paid Coach tier (CHF 9.99 / month or CHF 99 / year) adds unlimited projects, video notes, and a monthly quota of AI match analyses.",
+    q: "Can I cancel anytime?",
+    a: "Yes. The 7-day trial needs a card, but if you cancel before it ends you aren't charged. Paid subscriptions can be cancelled from your dashboard at any time and stay active until the end of the period you already paid for. Refunds follow Paddle's policy — see the refunds page for specifics.",
   },
   {
     q: "Do I need to connect my Riot account?",
