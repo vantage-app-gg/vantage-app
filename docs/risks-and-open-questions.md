@@ -66,10 +66,12 @@
 
 ## Open decisions (needed before relevant feature lands)
 
-### OD1 — Accent color (visual identity)
-- **Blocks:** Design system, first UI components.
-- **Options:** desaturated teal · electric blue · muted indigo.
-- **Timing:** Decide before first shadcn/ui component with color.
+### OD1 — Accent color (visual identity) — RESOLVED 2026-04-21
+- **Decision:** desaturated teal. OKLCH-based for perceptual consistency across dark/light themes.
+  - Dark: `oklch(0.72 0.1 195)` (~#4dbdb7)
+  - Light: `oklch(0.55 0.1 195)` (~#2d857f)
+- **Rationale:** tactical feel, differentiated from Valorant red and generic gaming blue, accessible contrast on both themes.
+- **Where it lives:** `--accent` / `--accent-foreground` in `src/app/globals.css`, exposed as `bg-accent` / `text-accent` via Tailwind v4 `@theme inline`.
 
 ### OD2 — Notes model: global vs per-project
 - **Blocks:** Notes feature implementation.

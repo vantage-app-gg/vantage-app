@@ -9,8 +9,8 @@
 
 Defined in `src/app/globals.css` via `@theme` blocks. Exact hex values TBD after initial component pass — but the palette is:
 
-- **Base:** neutral scale from black (`#0a0a0a`) through anthracite (`#1a1a1a`, `#262626`) to near-white (`#fafafa`).
-- **Accent (TBD):** single cool tone — likely a desaturated teal or electric blue. No reds (Valorant uses red for enemies — avoid accidental semantic clash).
+- **Base:** neutral scale in OKLCH (dark: `oklch(0.13 0 0)` background → `oklch(0.95 0 0)` foreground; light: inverse).
+- **Accent:** desaturated teal. Dark `oklch(0.72 0.1 195)`, light `oklch(0.55 0.1 195)`. Resolved 2026-04-21 (see OD1 in risks doc). No reds (Valorant uses red for enemies — avoid accidental semantic clash).
 - **Status:** success green, warning amber, error red, info blue — muted, not saturated.
 - **Ranks:** each rank tier has a tint used sparingly (badges, labels) — maps roughly to in-game rank colors but muted to prevent clash.
 

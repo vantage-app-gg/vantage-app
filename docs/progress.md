@@ -13,6 +13,15 @@
 
 ## Done
 
+### 2026-04-21 — Landing page + legal skeletons
+- Landing page at `/` with tactical-dark styling, accent color, Riot disclaimer.
+- 9 legal skeleton pages at `/legal/{imprint,privacy,terms,cookies,refunds,ai-info,accessibility,riot-disclaimer,contact-dpo}`.
+- Shared `<Footer>` links all 9 + copyright + contact email.
+- Accent color decided (OD1 closed): desaturated teal in OKLCH — `oklch(0.72 0.1 195)` dark, `oklch(0.55 0.1 195)` light.
+- Tactical-dark design tokens wired into `globals.css` via Tailwind v4 `@theme inline`.
+- `pnpm build` green (13 static routes). `pnpm lint` clean.
+- Unblocks task #7 (Paddle Merchant Account) once deployed to production URL.
+
 ### 2026-04-21 — Service accounts + scaffold
 - Brand: Vantage. Working domain reserved: `vantage-app.gg` (not yet purchased, on deferred list until pre-release).
 - Social handles: X `@vantage_app_gg`, Discord server, GitHub org `vantage-app-gg`, Instagram `vantage.app.gg`, Reddit `r/vantage_app`.
@@ -28,9 +37,7 @@
 
 ## In progress
 
-- Task #12: Next.js 16 scaffold + 19 doc-files + vercel.ts — **docs being authored now**.
-- Task #13: Deploy landing page + legal skeleton (blocked on docs landing first).
-- Task #7: Paddle Merchant Account (blocked on task #13 — needs live legal URLs).
+- Task #7: Paddle Merchant Account — unblocked as soon as Vercel finishes auto-deploying this push.
 
 ---
 
