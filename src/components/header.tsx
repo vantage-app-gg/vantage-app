@@ -18,7 +18,13 @@ export function Header() {
             Vantage
           </span>
         </Link>
-        <nav aria-label="Primary">
+        <nav aria-label="Primary" className="flex items-center gap-6">
+          <a
+            href="#pricing"
+            className="hidden sm:inline font-mono text-xs uppercase tracking-widest text-muted hover:text-accent-strong transition-colors"
+          >
+            Pricing
+          </a>
           <a
             href="#early-access"
             className="font-mono text-xs uppercase tracking-widest text-muted hover:text-accent-strong transition-colors"
