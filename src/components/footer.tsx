@@ -16,6 +16,38 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-10 flex flex-col gap-6">
+        <nav aria-label="Primary" className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <Link
+            href="/blog"
+            className="text-foreground hover:text-accent transition-colors"
+          >
+            Dev blog
+          </Link>
+          <a
+            href="https://x.com/vantage_app_gg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted hover:text-foreground transition-colors"
+          >
+            X / Twitter
+          </a>
+          <a
+            href="https://www.reddit.com/r/vantage_app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted hover:text-foreground transition-colors"
+          >
+            Reddit
+          </a>
+          <a
+            href="https://github.com/vantage-app-gg/vantage-app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted hover:text-foreground transition-colors"
+          >
+            GitHub
+          </a>
+        </nav>
         <nav aria-label="Legal">
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
             {legalLinks.map((link) => (
