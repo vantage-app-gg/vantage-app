@@ -1,3 +1,5 @@
+import { WaitlistForm } from "@/features/waitlist/waitlist-form";
+
 export function Cta() {
   return (
     <section
@@ -13,7 +15,7 @@ export function Cta() {
         }}
       />
 
-      <div className="relative mx-auto max-w-4xl px-6 py-28 flex flex-col gap-10">
+      <div className="relative mx-auto max-w-4xl px-6 py-28 flex flex-col gap-12">
         <div className="flex flex-col gap-4 max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-widest text-accent">
             Early access
@@ -24,10 +26,14 @@ export function Cta() {
             <span className="text-foreground">.</span>
           </h2>
           <p className="text-muted leading-relaxed">
-            A proper waitlist lands later. For now, the best way to follow
-            along — and raise your hand for the private beta — is through
-            the channels below.
+            Drop your email to get the private-beta invite the moment it
+            ships. Or follow along through the channels below while we get
+            there.
           </p>
+        </div>
+
+        <div className="card-gradient border border-border p-6 sm:p-8">
+          <WaitlistForm source="landing_cta" />
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3">
@@ -74,8 +80,8 @@ export function Cta() {
           Vantage isn&apos;t endorsed by Riot Games and doesn&apos;t reflect
           the views or opinions of Riot Games or anyone officially involved
           in producing or managing Riot Games properties. Riot Games, and
-          all associated properties, are trademarks or registered trademarks
-          of Riot Games, Inc.
+          all associated properties, are trademarks or registered
+          trademarks of Riot Games, Inc.
         </p>
       </div>
     </section>

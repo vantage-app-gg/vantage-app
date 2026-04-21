@@ -96,6 +96,16 @@ This creates a hidden file called `.env.local` containing every API key the app 
 
 ---
 
+### Step 5b — Apply the database schema (first time only)
+
+```powershell
+pnpm db:push
+```
+
+This creates the tables in your Neon database using Drizzle. Only needed on first setup of a new environment. On later machines you don't need to rerun it — Neon holds the schema centrally.
+
+---
+
 ### Step 6 — Run the app
 
 ```powershell
