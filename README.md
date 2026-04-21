@@ -20,74 +20,149 @@ Valorant improvement tool — curated learning content + AI-powered match analys
 
 See [docs/tech-stack.md](./docs/tech-stack.md) for reasoning.
 
-## Local setup
+## Setting up a new machine (from zero)
 
-Prerequisites: Node 24 LTS, pnpm, Vercel CLI (`npm i -g vercel`).
+This guide assumes you're sitting in front of a brand-new computer with **nothing installed**. Every step is copy-paste — follow them in order. Total time: ~15 minutes.
 
-```bash
+Primary instructions are for **Windows 11**. Mac instructions at the bottom.
+
+---
+
+### Step 1 — Install four programs
+
+Click each link, download the installer, run it with default settings. After installing, restart any open terminal windows so the new tools are picked up.
+
+| Program | Download link | What it does |
+|---|---|---|
+| **Git** | https://git-scm.com/download/win | downloads code from GitHub |
+| **Node.js 24 LTS** | https://nodejs.org/en | runs the app |
+| **GitHub CLI** | https://cli.github.com | so you can push code changes |
+| **VS Code** | https://code.visualstudio.com | your editor |
+
+---
+
+### Step 2 — Open PowerShell and install the command-line tools
+
+Press the **Windows key** → type **PowerShell** → press **Enter**. Paste this and press **Enter**:
+
+```powershell
+npm install -g pnpm vercel @anthropic-ai/claude-code
+```
+
+This installs three more tools:
+- `pnpm` — the package manager we use instead of `npm`
+- `vercel` — fetches your project secrets securely
+- `claude` — the Claude Code AI coding assistant
+
+---
+
+### Step 3 — Log in to everything
+
+Still in PowerShell, run these one at a time. Each opens a browser tab — sign in using **`vantage.app.gg@gmail.com`** wherever asked.
+
+```powershell
+gh auth login
+vercel login
+claude
+```
+
+`claude` will prompt you to log in once and then exit — that's expected.
+
+---
+
+### Step 4 — Download the project
+
+Pick where to store it (Documents is a safe default) and run:
+
+```powershell
+cd $HOME\Documents
 git clone https://github.com/vantage-app-gg/vantage-app.git
 cd vantage-app
 pnpm install
+```
+
+`pnpm install` downloads all the code dependencies. Takes ~1 minute.
+
+---
+
+### Step 5 — Pull your secrets from Vercel
+
+```powershell
 vercel link --project vantage-app
 vercel env pull .env.local
+```
+
+This creates a hidden file called `.env.local` containing every API key the app needs (Clerk, Neon database, Sentry, PostHog, YouTube, Riot). The file is automatically ignored by Git — **never commit it**.
+
+---
+
+### Step 6 — Run the app
+
+```powershell
 pnpm dev
 ```
 
-App runs at http://localhost:3000.
+Open **http://localhost:3000** in your browser. If you see the Vantage landing page — you're done. ✅
 
-## Getting started on a new machine
+To stop the server, press `Ctrl + C` in PowerShell.
 
-Cloud-first by design — the repo is the source of truth, Vercel holds the env vars, every third-party account is tied to `vantage.app.gg@gmail.com`. You should be coding again within ~10 minutes.
+---
 
-**1. Install prerequisites**
-```bash
-# Git, Node 24 LTS, pnpm (install via your OS package manager or nvm)
-npm i -g vercel                         # Vercel CLI
-npm i -g @anthropic-ai/claude-code      # Claude Code CLI
+### Step 7 — Start coding
+
+From the same folder:
+
+```powershell
+code .       # opens VS Code in this folder
+claude       # starts Claude Code inside this folder
 ```
 
-**2. Clone + install**
-```bash
-git clone https://github.com/vantage-app-gg/vantage-app.git
-cd vantage-app
-pnpm install
+---
+
+### Step 8 (optional but recommended) — Bring over Claude's memory
+
+Claude keeps notes about our decisions and your preferences in **your user profile** — these notes are **not** stored in the repo. On a fresh machine they'll be empty.
+
+To bring them over, on the **old** machine locate this folder:
+
+```
+C:\Users\<old-username>\.claude\projects\C--Users-<old-username>-Documents-Valorant-Improvement-Tool\memory\
 ```
 
-**3. Link to Vercel + pull env vars**
-```bash
-vercel login                            # browser auth, once per machine
-vercel link --project vantage-app       # associates this folder with the Vercel project
-vercel env pull .env.local              # writes every secret you need (Clerk, Neon, Sentry, PostHog, YouTube, Riot)
+Copy it via USB stick, cloud drive, or zip → email. On the **new** machine paste it into the matching path:
+
+```
+C:\Users\<new-username>\.claude\projects\C--Users-<new-username>-Documents-Valorant-Improvement-Tool\memory\
 ```
 
-**4. Authenticate for git pushes**
+The folder name encodes the full path — if you saved the project somewhere other than Documents, rename the folder so it matches your new path.
 
-Either GitHub CLI (easiest):
+**Easier long-term alternative:** move your entire `C:\Users\<you>\.claude\` folder into OneDrive or another cloud-sync folder. Then it's mirrored automatically whenever you switch machines.
+
+If you skip this step, Claude will still work — it just won't remember what we've talked about in past sessions.
+
+---
+
+### What you do NOT need to do
+
+- ❌ Re-create any of the 20 service accounts — they all exist and are tied to `vantage.app.gg@gmail.com`, just log in.
+- ❌ Install PostgreSQL locally — our database (Neon) lives in the cloud.
+- ❌ Copy any `.env` files between machines — `vercel env pull` handles that.
+
+---
+
+### On a Mac?
+
+Replace Step 1 and Step 2 with these, run in **Terminal** instead of PowerShell. Everything from Step 3 onwards is identical.
+
 ```bash
-gh auth login                           # follow the browser flow
-```
-…or configure an SSH key / personal access token on GitHub manually.
-
-**5. First run**
-```bash
-pnpm dev                                # http://localhost:3000
-pnpm build                              # sanity-check the production build
+# Install Homebrew first: https://brew.sh
+brew install git node pnpm gh
+brew install --cask visual-studio-code
+npm install -g vercel @anthropic-ai/claude-code
 ```
 
-### What does NOT come from the repo
-
-- **Claude Code CLI memory** lives in your user profile (`~/.claude/projects/<path-hash>/memory/`), not in git. Options on a new machine:
-  - (a) Mirror your whole `~/.claude/` via a cloud-sync folder (OneDrive, Dropbox, iCloud) — most robust.
-  - (b) Copy only the project's `memory/` directory manually (`MEMORY.md` + the few `*.md` entries).
-  - (c) Start empty; Claude rebuilds memory over time but loses prior-session context.
-- **Claude Code CLI auth** — run `claude` once; it opens a browser for login.
-- **Browser-based third-party logins** — Clerk, Neon, Sentry, PostHog, Paddle, Vercel, GitHub, Google Cloud, Riot Developer Portal. All use `vantage.app.gg@gmail.com`. Just log in; never re-create accounts.
-
-### What you do NOT need to reinstall
-
-- A local Postgres — Neon is cloud-hosted; `vercel env pull` wires you up.
-- Any secrets in dotfiles or a password manager — Vercel is the source of truth.
-- Any of the 20 service accounts — they're already provisioned.
+Claude's memory folder on Mac is `~/.claude/projects/...`.
 
 ## Commands
 
