@@ -67,11 +67,12 @@
 ## Open decisions (needed before relevant feature lands)
 
 ### OD1 — Accent color (visual identity) — RESOLVED 2026-04-21
-- **Decision:** desaturated teal. OKLCH-based for perceptual consistency across dark/light themes.
-  - Dark: `oklch(0.72 0.1 195)` (~#4dbdb7)
-  - Light: `oklch(0.55 0.1 195)` (~#2d857f)
-- **Rationale:** tactical feel, differentiated from Valorant red and generic gaming blue, accessible contrast on both themes.
-- **Where it lives:** `--accent` / `--accent-foreground` in `src/app/globals.css`, exposed as `bg-accent` / `text-accent` via Tailwind v4 `@theme inline`.
+- **Decision:** desaturated teal. OKLCH-based, slightly brighter than originally planned to pop against the tactical-dark surface.
+  - Primary: `oklch(0.78 0.13 195)`
+  - Strong (hover / gradients): `oklch(0.86 0.15 195)`
+- **Rationale:** tactical feel, differentiated from Valorant red and generic gaming blue, good luminance against `oklch(0.13 0 0)` background.
+- **Where it lives:** `--accent` / `--accent-strong` / `--accent-foreground` in `src/app/globals.css`, exposed via Tailwind v4 `@theme inline`.
+- **Updated 2026-04-22:** Site is dark-only for now (`color-scheme: dark`). Light mode returns with a manual toggle in V1.1+.
 
 ### OD2 — Notes model: global vs per-project
 - **Blocks:** Notes feature implementation.

@@ -1,27 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: oklch(1 0 0);
-  --surface: oklch(0.97 0 0);
-  --surface-elevated: oklch(0.94 0 0);
-  --border: oklch(0.88 0 0);
-  --foreground: oklch(0.18 0 0);
-  --muted: oklch(0.48 0 0);
-  --accent: oklch(0.55 0.1 195);
-  --accent-foreground: oklch(0.98 0 0);
-}
+  color-scheme: dark;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: oklch(0.13 0 0);
-    --surface: oklch(0.17 0 0);
-    --surface-elevated: oklch(0.21 0 0);
-    --border: oklch(0.26 0 0);
-    --foreground: oklch(0.95 0 0);
-    --muted: oklch(0.65 0 0);
-    --accent: oklch(0.72 0.1 195);
-    --accent-foreground: oklch(0.13 0 0);
-  }
+  --background: oklch(0.13 0 0);
+  --surface: oklch(0.17 0 0);
+  --surface-elevated: oklch(0.21 0 0);
+  --border: oklch(0.26 0 0);
+  --border-strong: oklch(0.34 0 0);
+  --foreground: oklch(0.96 0 0);
+  --muted: oklch(0.68 0 0);
+  --accent: oklch(0.62 0.17 195);
+  --accent-strong: oklch(0.82 0.14 195);
+  --accent-foreground: oklch(0.02 0 0);
+  --accent-glow: oklch(0.72 0.15 195 / 0.4);
 }
 
 @theme inline {
@@ -29,9 +21,11 @@
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -40,12 +34,90 @@
   --radius-lg: 6px;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 15px;
   line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Global ambient glow — fixed, sits behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      600px circle at 15% 10%,
+      color-mix(in oklch, var(--accent) 18%, transparent) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      800px circle at 85% 40%,
+      color-mix(in oklch, var(--accent) 8%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      1000px circle at 50% 120%,
+      color-mix(in oklch, var(--accent) 10%, transparent) 0%,
+      transparent 55%
+    );
+}
+
+/* Subtle grid noise on surface panels */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(
+    135deg,
+    var(--foreground) 0%,
+    var(--accent-strong) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.card-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--surface-elevated) 0%,
+    var(--surface) 100%
+  );
+}
+
+.btn-accent-glow {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--accent-strong) 40%, transparent),
+    0 10px 40px -12px var(--accent-glow);
+  transition:
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.btn-accent-glow:hover {
+  box-shadow:
+    inset 0 0 0 1px var(--accent-strong),
+    0 16px 60px -8px var(--accent-glow);
+  transform: translateY(-1px);
 }
 
 a {
@@ -56,4 +128,17 @@ a {
 *:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn-accent-glow {
+    transition: none;
+  }
+  .btn-accent-glow:hover {
+    transform: none;
+  }
 }
