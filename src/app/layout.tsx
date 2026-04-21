@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AnalyticsProvider } from "@/components/analytics-provider";
+import { ConsentBanner } from "@/components/consent-banner";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import "./globals.css";
@@ -48,6 +50,8 @@ export default function RootLayout({
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
+        <AnalyticsProvider />
+        <ConsentBanner />
       </body>
     </html>
   );
